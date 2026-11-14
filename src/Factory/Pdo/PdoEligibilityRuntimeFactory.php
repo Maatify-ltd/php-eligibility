@@ -11,7 +11,7 @@ use Maatify\Eligibility\Management\Repository\Pdo\PdoRuleCommandRepository;
 use Maatify\Eligibility\Management\Repository\Pdo\PdoRuleManagementQuery;
 use Maatify\Eligibility\Management\Service\EligibilityManagementService;
 use Maatify\Eligibility\Management\Service\EligibilityManagementServiceInterface;
-use Maatify\Persistence\Pdo\Transaction\PdoSavepointTransactionRunner;
+use Maatify\PhpPersistence\Transaction\Repository\PdoSavepointTransactionRunner;
 use PDO;
 
 /**

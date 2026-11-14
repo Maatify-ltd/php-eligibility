@@ -1,6 +1,6 @@
 # Security Policy
 
-[![Maatify Eligibility](https://img.shields.io/badge/Maatify-Eligibility-blue?style=for-the-badge)](https://github.com/Maatify/php-eligibility)
+[![Maatify Eligibility](https://img.shields.io/badge/Maatify-Eligibility-blue?style=for-the-badge)](https://github.com/Maatify-ltd/php-eligibility)
 [![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-9C27B0?style=for-the-badge)](https://github.com/Maatify)
 
 ## Supported Versions
@@ -19,7 +19,7 @@ Please report a suspected vulnerability privately instead of opening a public
 issue, so it can be assessed before it is disclosed.
 
 Use the repository's private security channel
-[GitHub Security Advisories](https://github.com/Maatify/php-eligibility/security/advisories/new)
+[GitHub Security Advisories](https://github.com/Maatify-ltd/php-eligibility/security/advisories/new)
 and include:
 
 - The affected package and the exact branch/commit you tested.

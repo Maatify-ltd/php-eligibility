@@ -729,15 +729,15 @@ Management Rule reads are paginated rather than bounded by a fixed
 `maxResults`. The public contract is:
 
 ```text
-inspectRules(RuleCriteria $criteria, PageRequest $pageRequest): PageResult<Rule>
+inspectRules(RuleCriteria $criteria, PageRequest $pageRequest): PageResultDTO<Rule>
 ```
 
 `RuleCriteria` carries only the domain filters (Subject, optional dimension
-key, optional lifecycle, optional effect); `PageRequest` and `PageResult` are
-the stable published types from `Maatify\Persistence\Pdo\Pagination`. Eligibility
+key, optional lifecycle, optional effect); `PageRequest` and `PageResultDTO` are
+the shared Pagination types from `maatify/php-persistence`. Eligibility
 does not implement a package-local page/per-page normalization, sort-resolution
 engine, offset engine, or pagination metadata engine; those mechanics are
-delegated to `maatify/persistence`'s `PdoPaginator`. Shared per-page bounds are
+delegated to `maatify/php-persistence`'s `PdoPaginator`. Shared per-page bounds are
 those of the approved Pagination configuration: default `20`, minimum `1`,
 maximum `200`.
 
@@ -767,7 +767,7 @@ collection, because there is no proven small hard domain bound for distinct
 active dimensions for a Subject:
 
 ```text
-inspectActiveDimensionKeys(ActiveDimensionKeysCriteria $criteria, PageRequest $pageRequest): PageResult<ActiveDimensionKeyDTO>
+inspectActiveDimensionKeys(ActiveDimensionKeysCriteria $criteria, PageRequest $pageRequest): PageResultDTO<ActiveDimensionKeyDTO>
 ```
 
 Semantics: scope is one Subject; visibility is active Rules only; the result
@@ -842,7 +842,7 @@ The operation MUST be atomic from the caller's perspective and preserve Rule nat
 
 This prevents every Host from implementing its own unsafe `delete all then insert` synchronization routine while preserving the canonical reversible lifecycle.
 
-The package MUST coordinate correctly with an existing Host transaction when the Host composes Eligibility mutation with a larger domain operation. Eligibility delegates generic transaction/savepoint mechanics to the released `maatify/persistence` API through `SavepointTransactionRunnerInterface`; the command/mutation adapters and runner MUST use the same PDO connection. The transaction participation contract is:
+The package MUST coordinate correctly with an existing Host transaction when the Host composes Eligibility mutation with a larger domain operation. Eligibility delegates generic transaction/savepoint mechanics to the shared `maatify/php-persistence` RC API through `SavepointTransactionRunnerInterface`; the command/mutation adapters and runner MUST use the same PDO connection. The transaction participation contract is:
 
 - when no transaction is active on the shared runner's PDO boundary, `PdoSavepointTransactionRunner` owns the transaction for this multi-step operation: it begins the transaction, commits only after the complete replacement succeeds, and rolls back only while that transaction remains active;
 - when an outer Host transaction is already active on the same PDO boundary, the shared runner uses an operation-local savepoint and MUST NOT commit or fully roll back the Host transaction; the Host owns the outer commit/rollback;
@@ -1253,8 +1253,7 @@ The Host owns:
 
 ## Persistence dependency and transaction ownership
 
-Eligibility declares `maatify/persistence ^1.4` as an explicit runtime
-dependency. `v1.4.0` is the minimum stable line required for the released
+The [checkout trial](docs/decisions/DEC-006-persistence-rc-trial.md) requires `maatify/php-persistence 1.0.0-rc.1` for
 `SavepointTransactionRunnerInterface` and `PdoSavepointTransactionRunner`.
 Eligibility uses that shared runner for replacement and cleanup; it does not
 implement a local generic transaction or savepoint engine.
@@ -1313,7 +1312,7 @@ construction path is part of this current RC2 contract.
 - `DesiredRule(mixed $dimensionValue, RuleEffectEnum $effect)` represents one desired active value/effect pair without lifecycle state. `DesiredRuleCollection` rejects duplicate dimension values, orders values canonically, and accepts an empty set.
 - `ReplaceDimensionRulesCommand(Subject $subject, mixed $dimensionKey, DesiredRuleCollection $desiredRules)` represents complete desired active-set replacement intent.
 - `CleanupSubjectCommand(Subject $subject)` represents idempotent Subject cleanup intent.
-- `RuleCriteria(Subject $subject, mixed $dimensionKey = null, ?RuleLifecycleEnum $lifecycle = null, ?RuleEffectEnum $effect = null)` represents a paginated management read for one Subject. Dimension, lifecycle, and effect filters are all optional. `RuleCriteria` carries no pagination state itself; the caller supplies pagination separately as a `Maatify\Persistence\Pdo\Pagination\PageRequest`.
+- `RuleCriteria(Subject $subject, mixed $dimensionKey = null, ?RuleLifecycleEnum $lifecycle = null, ?RuleEffectEnum $effect = null)` represents a paginated management read for one Subject. Dimension, lifecycle, and effect filters are all optional. `RuleCriteria` carries no pagination state itself; the caller supplies pagination separately as a `Maatify\PhpPersistence\Pagination\Criteria\PageRequest`.
 - `ActiveDimensionKeysCriteria(Subject $subject)` represents active-dimension introspection for one Subject; the caller likewise supplies a `PageRequest` separately.
 - `RuleLifecycleSummaryCriteria(Subject $subject, mixed $dimensionKey = null)` represents the input to the Rule lifecycle count summary; the optional dimension key is an exact filter, and a `null` dimension key summarizes every Rule for the Subject. This criteria is intentionally not paginated: it has no lifecycle filter, effect filter, or time-window input, because it always summarizes complete lifecycle state for its Subject/dimension scope.
 
@@ -1323,9 +1322,9 @@ construction path is part of this current RC2 contract.
 - `RuleLifecycleSummaryDTO` carries `totalRules`, `activeRules`, and `inactiveRules`; the constructor enforces `totalRules === activeRules + inactiveRules` and non-negative counts.
 - `SubjectDecisionDTO` associates one `Subject` with one `EligibilityDecision`. `SubjectDecisionCollectionDTO` rejects duplicate Subject identities, accepts an empty result, and preserves the supplied result order.
 - `EligibilityEvaluationServiceInterface` exposes `decide(Subject $subject, Context $context): EligibilityDecision` and `decideMany(SubjectCollection $subjects, Context $context): SubjectDecisionCollectionDTO`. It is implemented by the concrete `EligibilityEvaluationService` documented under the current runtime services below.
-- `EligibilityManagementServiceInterface` exposes typed Rule creation, identity inspection, paginated Rule inspection, paginated active-dimension inspection, a lifecycle count summary, effect/lifecycle mutations, replacement intent, and Subject cleanup. Its state-setting methods return `void` except `createRule(...): Rule`; `inspectRule(...): Rule` has a typed Rule-not-found contract; `inspectRules(RuleCriteria, PageRequest): PageResult<Rule>` and `inspectActiveDimensionKeys(ActiveDimensionKeysCriteria, PageRequest): PageResult<ActiveDimensionKeyDTO>` delegate pagination mechanics to `maatify/persistence`; `inspectRuleLifecycleSummary(RuleLifecycleSummaryCriteria): RuleLifecycleSummaryDTO` returns the aggregate lifecycle count.
+- `EligibilityManagementServiceInterface` exposes typed Rule creation, identity inspection, paginated Rule inspection, paginated active-dimension inspection, a lifecycle count summary, effect/lifecycle mutations, replacement intent, and Subject cleanup. Its state-setting methods return `void` except `createRule(...): Rule`; `inspectRule(...): Rule` has a typed Rule-not-found contract; `inspectRules(RuleCriteria, PageRequest): PageResultDTO<Rule>` and `inspectActiveDimensionKeys(ActiveDimensionKeysCriteria, PageRequest): PageResultDTO<ActiveDimensionKeyDTO>` delegate pagination mechanics to `maatify/php-persistence`; `inspectRuleLifecycleSummary(RuleLifecycleSummaryCriteria): RuleLifecycleSummaryDTO` returns the aggregate lifecycle count.
 - `RuleCommandRepositoryInterface` is the replaceable command/mutation persistence contract. It exposes only canonical Rule creation, effect/lifecycle mutations, and Subject cleanup.
-- `RuleManagementQueryInterface` is the replaceable management-query persistence contract. It exposes natural-identity lookup, paginated management reads (`findByCriteria(RuleCriteria, PageRequest): PageResult<Rule>`), paginated active-dimension lookup (`findActiveDimensionKeys(ActiveDimensionKeysCriteria, PageRequest): PageResult<ActiveDimensionKeyDTO>`), and the lifecycle summary aggregate (`summarizeLifecycle(RuleLifecycleSummaryCriteria): RuleLifecycleSummaryDTO`), including inactive Rules where criteria allow them.
+- `RuleManagementQueryInterface` is the replaceable management-query persistence contract. It exposes natural-identity lookup, paginated management reads (`findByCriteria(RuleCriteria, PageRequest): PageResultDTO<Rule>`), paginated active-dimension lookup (`findActiveDimensionKeys(ActiveDimensionKeysCriteria, PageRequest): PageResultDTO<ActiveDimensionKeyDTO>`), and the lifecycle summary aggregate (`summarizeLifecycle(RuleLifecycleSummaryCriteria): RuleLifecycleSummaryDTO`), including inactive Rules where criteria allow them.
 - `ActiveRuleReaderInterface` is the replaceable evaluation-read persistence contract. It exposes only bounded bulk loading of active Rules for a supplied `SubjectCollection`.
 - `RuleMutationSupportInterface` is a package-internal Eligibility-specific persistence contract. It owns only the coordination lock, complete Subject + dimension mutation read, and coordination cleanup required by atomic replacement and cleanup; it is not a Management Query or Evaluation Read contract.
 
@@ -1338,7 +1337,7 @@ construction path is part of this current RC2 contract.
   `createEvaluationService(): EligibilityEvaluationServiceInterface`.
 
 - `Maatify\Eligibility\Evaluation\Service\EligibilityEvaluationService` implements `EligibilityEvaluationServiceInterface` and depends only on `ActiveRuleReaderInterface`. It loads active Rules through one reader bulk call for a batch and delegates both single and batch calls to the shared pure `Maatify\Eligibility\Evaluation\Service\EligibilityRuleEvaluator`; `PdoActiveRuleReader` internally chunks large Subject collections at its configured bound, and the service preserves input order.
-- `Maatify\Eligibility\Management\Service\EligibilityManagementService` implements `EligibilityManagementServiceInterface`. It maps missing identity mutation results to `RuleNotFoundException` and coordinates create, inspect, lifecycle/effect, replacement, and cleanup behavior without SQL. Its dependencies are explicit: `RuleCommandRepositoryInterface` for command mutations, `RuleManagementQueryInterface` for management reads, `RuleMutationSupportInterface` for atomic replacement/cleanup support, and `Maatify\Persistence\Pdo\Transaction\SavepointTransactionRunnerInterface` for shared transaction/savepoint execution.
+- `Maatify\Eligibility\Management\Service\EligibilityManagementService` implements `EligibilityManagementServiceInterface`. It maps missing identity mutation results to `RuleNotFoundException` and coordinates create, inspect, lifecycle/effect, replacement, and cleanup behavior without SQL. Its dependencies are explicit: `RuleCommandRepositoryInterface` for command mutations, `RuleManagementQueryInterface` for management reads, `RuleMutationSupportInterface` for atomic replacement/cleanup support, and `Maatify\PhpPersistence\Transaction\Repository\SavepointTransactionRunnerInterface` for shared transaction/savepoint execution.
 - `Maatify\Eligibility\Evaluation\Service\EligibilityRuleEvaluator` is package-internal shared evaluation logic. It groups active Rules by dimension, evaluates every ruled dimension, applies DENY precedence, preserves the complete matching trace, and constructs the existing immutable Decision types in canonical order.
 
 ### Semantic exceptions
@@ -1373,7 +1372,7 @@ are listed separately below.
 ### Persistence implementation and bounds
 
 - `Maatify\Eligibility\Management\Repository\Pdo\PdoRuleCommandRepository` is the concrete direct-PDO implementation of `RuleCommandRepositoryInterface` and `RuleMutationSupportInterface`. It provides both Eligibility-specific capabilities over the same PDO connection without owning generic transaction/savepoint mechanics.
-- `Maatify\Eligibility\Management\Repository\Pdo\PdoRuleManagementQuery` is the concrete direct-PDO implementation of `RuleManagementQueryInterface`. It provides exact identity reads, paginated management reads, lifecycle visibility, paginated active-dimension reads, and the lifecycle summary aggregate. It delegates page/per-page normalization, sort resolution, count execution, and pagination metadata to `Maatify\Persistence\Pdo\Pagination\PdoPaginator`, owning only its domain filter/count SQL and row mapping; the lifecycle summary aggregate (`SUM(CASE ...)`) is computed in the database rather than by loading Rules into PHP.
+- `Maatify\Eligibility\Management\Repository\Pdo\PdoRuleManagementQuery` is the concrete direct-PDO implementation of `RuleManagementQueryInterface`. It provides exact identity reads, paginated management reads, lifecycle visibility, paginated active-dimension reads, and the lifecycle summary aggregate. It delegates page/per-page normalization, sort resolution, count execution, and pagination metadata to `Maatify\PhpPersistence\Pagination\Repository\PdoPaginator`, owning only its domain filter/count SQL and row mapping; the lifecycle summary aggregate (`SUM(CASE ...)`) is computed in the database rather than by loading Rules into PHP.
 - `Maatify\Eligibility\Evaluation\Repository\Pdo\PdoActiveRuleReader` is the concrete direct-PDO implementation of `ActiveRuleReaderInterface`. It provides the active-only bounded bulk read used by evaluation.
 - `PdoRuleHydrationTrait` is an internal implementation helper for shared PDO row binding and Rule hydration; it is not a public contract or business-service abstraction.
 - `Maatify\Eligibility\Management\Repository\RuleMutationSupportInterface` is a package-internal mutation-support contract used by `EligibilityManagementService` for the complete Subject + dimension read, Subject coordination lock, and coordination cleanup; it is not an additional Host-facing service method.

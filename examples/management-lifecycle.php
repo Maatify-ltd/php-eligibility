@@ -14,7 +14,7 @@ use Maatify\Eligibility\Management\Criteria\RuleLifecycleSummaryCriteria;
 use Maatify\Eligibility\Factory\Pdo\PdoEligibilityRuntimeFactory;
 use Maatify\Eligibility\Enum\RuleEffectEnum;
 use Maatify\Eligibility\Enum\RuleLifecycleEnum;
-use Maatify\Persistence\Pdo\Pagination\PageRequest;
+use Maatify\PhpPersistence\Pagination\Criteria\PageRequest;
 
 require __DIR__ . '/../vendor/autoload.php';
 

@@ -31,6 +31,8 @@ jobs:
           php-version: '8.4'
           tools: composer:2.10.3
           coverage: none
+      - name: Verify actual PHP security patch floor
+        run: php tools/check-php-floor.php
       - name: Verify Composer 2.10 capability
         run: |
           composer --version
@@ -64,6 +66,8 @@ jobs:
         with:
           php-version: '8.4'
           coverage: none
+      - name: Verify actual PHP security patch floor
+        run: php tools/check-php-floor.php
       - name: Resolve current compatible dependencies
         run: composer update --no-interaction --prefer-dist --no-progress
       - name: PHP syntax lint
@@ -83,6 +87,8 @@ jobs:
         with:
           php-version: '8.4'
           coverage: none
+      - name: Verify actual PHP security patch floor
+        run: php tools/check-php-floor.php
       - name: Resolve current compatible dependencies
         run: composer update --no-interaction --prefer-dist --no-progress
       - name: Check PER-CS 3.1 style

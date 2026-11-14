@@ -15,7 +15,7 @@
 [![Packagist](https://img.shields.io/badge/Packagist-package-blue)](https://packagist.org/packages/maatify/php-eligibility)
 [![Monthly Downloads](https://img.shields.io/packagist/dm/maatify/php-eligibility?label=Monthly%20Downloads)](https://packagist.org/packages/maatify/php-eligibility)
 [![Total Downloads](https://img.shields.io/packagist/dt/maatify/php-eligibility?label=Total%20Downloads)](https://packagist.org/packages/maatify/php-eligibility)
-[![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-blueviolet)](https://github.com/Maatify)
+[![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-blueviolet)](https://github.com/Maatify-ltd)
 [![Install](https://img.shields.io/packagist/v/maatify/php-eligibility?include_prereleases&label=Install&color=blue)](https://packagist.org/packages/maatify/php-eligibility)
 
 **Documentation:**<br>
@@ -48,24 +48,15 @@ Host Input -> Public API -> Domain Service -> Integration Boundary -> Observable
 The package knows external identities only. It does not know the database
 model, lifecycle, or implementation of the domains that own those identities.
 
-The canonical public/runtime/behavioral contract and complete Public Runtime API
-inventory for the **target Pre-Stable `v1.0.0-rc.2` source/release line** are in
-[ELIGIBILITY_PACKAGE_REFERENCE.md](ELIGIBILITY_PACKAGE_REFERENCE.md).
-The package identity is `maatify/php-eligibility`; Packagist is its intended
-distribution channel: [package page](https://packagist.org/packages/maatify/php-eligibility).
+The [Package Reference](ELIGIBILITY_PACKAGE_REFERENCE.md) documents the
+checkout. See the [published RC documentation](https://github.com/Maatify-ltd/php-eligibility/tree/v1.0.0-rc.2)
+for the installed release's API.
 
 ## Status
 
-- **Target pre-release / source-release line:** `v1.0.0-rc.2`.
-- **Release state:** This repository currently targets the Pre-Stable
-  `v1.0.0-rc.2` source/release line, in the intended Stable `1.0` line.
-- **Publication boundary:** Repository source alone does not establish
-  Published state; exact external availability is determined by the exact
-  `v1.0.0-rc.2` tag through the approved Composer distribution source.
+- **Published RC:** [v1.0.0-rc.2](https://packagist.org/packages/maatify/php-eligibility).
 - **Published Stable:** None.
-- **Package identity:** `maatify/php-eligibility`.
-- **Intended distribution channel:** [Packagist](https://packagist.org/packages/maatify/php-eligibility).
-- **Quality:** see [Quality Status](#quality-status).
+- **Checkout:** Trials the new shared Persistence package.
 
 ## Key Features
 
@@ -98,11 +89,10 @@ distribution channel: [package page](https://packagist.org/packages/maatify/php-
 |---|---|
 | PHP | `^8.4` |
 | PHP extensions | `ext-pdo`, `ext-pdo_mysql`, `ext-pcre` |
-| Runtime packages | `maatify/exceptions` (`^1.0`), `maatify/persistence` (`^1.4`) |
+| Runtime packages | `maatify/exceptions` (`^1.0`), `maatify/php-persistence` (checkout trial `1.0.0-rc.1`) |
 | Database | MySQL-compatible database-server semantics through direct PDO (capability-based; no minimum product version is declared — see [Persistence and Schema](#persistence-and-schema)) |
 
-`maatify/persistence ^1.4` is an explicit runtime dependency. `v1.4.0` is the
-minimum stable line required for the released
+The checkout trials `maatify/php-persistence 1.0.0-rc.1` for
 `SavepointTransactionRunnerInterface` and `PdoSavepointTransactionRunner`.
 Eligibility delegates transaction ownership, operation-local savepoints,
 cleanup, and original-`Throwable` preservation to that shared API.
@@ -116,31 +106,27 @@ executed MariaDB verification.
 
 ## Installation
 
-The exact Composer command for the target Pre-Stable `v1.0.0-rc.2`
-source/release line is:
+Install the published RC:
 
 ```bash
 composer require maatify/php-eligibility:1.0.0-rc.2@RC
 ```
 
-This command is externally resolvable when the exact version is published
-through the approved Composer distribution source; this document is not
-publication evidence.
+The remaining API examples on this page describe the checkout.
 
 ### Development access
 
-For development access only, use a local checkout of the current `main` branch
-through a Composer path repository. This development path is separate from the
-target Pre-Stable `v1.0.0-rc.2` source/release line. From your consumer project:
+For development access only, use a local checkout of the development branch through a Composer path repository. The checkout examples
+below use the new shared Persistence API. From your consumer project:
 
 ```bash
-git clone https://github.com/Maatify/php-eligibility.git .tools/php-eligibility
-composer config repositories.php-eligibility '{"type":"path","url":".tools/php-eligibility","options":{"symlink":true}}'
-composer require maatify/php-eligibility:dev-main
+git clone https://github.com/Maatify-ltd/php-eligibility.git .tools/php-eligibility
+# Check out the development revision you want to test.
+composer config repositories.php-eligibility '{"type":"path","url":".tools/php-eligibility","options":{"symlink":true,"versions":{"maatify/php-eligibility":"dev-local"}}}'
+composer require maatify/php-eligibility:dev-local maatify/php-persistence:1.0.0-rc.1@RC
 ```
 
-The `dev-main` constraint is development-only access to the current `main`
-checkout. For developing the library itself (running the full local parity suite),
+The `dev-local` identity comes from the path repository configuration. For developing the library itself (running the full local parity suite),
 clone into a working directory and follow [Development and Testing](#development-and-testing).
 
 Installation (both paths) requires `ext-pdo`, `ext-pdo_mysql`, and
@@ -153,9 +139,7 @@ not a migration run at install time.
 ### Evaluation
 
 ```php
-use Maatify\Eligibility\Management\Criteria\RuleCriteria;
 use Maatify\Eligibility\Factory\Pdo\PdoEligibilityRuntimeFactory;
-use Maatify\Eligibility\Evaluation\Enum\DecisionReasonEnum;
 use Maatify\Eligibility\Enum\RuleEffectEnum;
 use Maatify\Eligibility\Evaluation\ValueObject\Context;
 use Maatify\Eligibility\Evaluation\ValueObject\ContextDimension;
@@ -195,51 +179,8 @@ if ($decision->eligible) {
 }
 ```
 
-### Ordered batch evaluation
-
-```php
-use Maatify\Eligibility\ValueObject\SubjectCollection;
-
-$decisions = $evaluation->decideMany(
-    new SubjectCollection(
-        new Subject('product', '150'),
-        new Subject('product', '151'),
-    ),
-    new Context(ContextDimension::fromStrings('country', 'EG')),
-);
-// Results preserve the supplied Subject order; duplicate Subjects are rejected.
-```
-
-### Management lifecycle
-
-```php
-use Maatify\Eligibility\Management\Command\ReplaceDimensionRulesCommand;
-use Maatify\Eligibility\Management\Criteria\RuleLifecycleSummaryCriteria;
-use Maatify\Eligibility\Management\ValueObject\DesiredRule;
-use Maatify\Eligibility\Management\ValueObject\DesiredRuleCollection;
-use Maatify\Persistence\Pdo\Pagination\PageRequest;
-
-// Atomic replacement of the complete active set for one Subject dimension.
-$management->replaceDimensionRules(new ReplaceDimensionRulesCommand(
-    $subject,
-    'country',
-    new DesiredRuleCollection(
-        new DesiredRule('EG', RuleEffectEnum::ALLOW),
-        new DesiredRule('KW', RuleEffectEnum::ALLOW),
-    ),
-));
-
-// Paginated management reads include inactive Rules and accept optional
-// dimension/lifecycle/effect filters; pagination mechanics are delegated to
-// maatify/persistence. A null PageRequest field means the canonical default
-// (page 1, per-page 20, dimension_key/dimension_value ascending order).
-$page = $management->inspectRules(new RuleCriteria($subject, 'country'), new PageRequest());
-// $page->data, $page->total, $page->filtered, $page->hasNext, ...
-
-// Rule lifecycle count summary for a Subject, optionally scoped to one dimension.
-$summary = $management->inspectRuleLifecycleSummary(new RuleLifecycleSummaryCriteria($subject));
-// $summary->totalRules === $summary->activeRules + $summary->inactiveRules
-```
+See the [Usage Guide](docs/guides/USAGE_GUIDE.md) for batch evaluation and
+management, including pagination and atomic rule replacement.
 
 ## Public Runtime API
 
@@ -268,8 +209,8 @@ Public surface (see the
   owns only the coordination lock, complete Subject + dimension mutation read,
   and coordination cleanup needed by atomic replacement/cleanup. Generic
   transaction/savepoint and pagination mechanics are owned by
-  `maatify/persistence` (`SavepointTransactionRunnerInterface`, `PageRequest`,
-  `PageResult`, `PdoPaginator`); Eligibility owns only its domain
+  `maatify/php-persistence` (`SavepointTransactionRunnerInterface`, `PageRequest`,
+  `PageResultDTO`, `PdoPaginator`); Eligibility owns only its domain
   filter/count SQL and row mapping.
 - **Default PDO construction:** `PdoEligibilityRuntimeFactory` accepts one
   caller-owned `PDO` and returns the Evaluation and Management service
@@ -295,80 +236,12 @@ Public surface (see the
   storage failures (for example an unclassified `PDOException`) propagate
   unchanged rather than being forced into the Eligibility marker.
 
-## Critical Runtime Behavior
+## Host responsibilities
 
-- **No active Rules for any dimension** -> `UNRESTRICTED`, eligible, with no
-  dimension outcomes. This does not mean the owning domain has enabled the
-  Subject.
-- **Per-dimension evaluation**, grouped by dimension key, combined with **AND**
-  across dimensions. No inference across dimensions or Subjects.
-- **DENY always wins within a dimension** over every matching ALLOW.
-- **ALLOW Rules create an allow-list**: at least one supplied Context value must
-  match an ALLOW, otherwise the dimension fails.
-- **DENY-only Rules behave as a deny-list**: the dimension passes unless a DENY
-  value matches.
-- **Missing Context values are explicit**: an ALLOW dimension absent from the
-  Context fails; a DENY-only dimension absent from the Context passes
-  (fail-open). The trace distinguishes both from supplied non-matching values.
-- **Lifecycle**: create always stores active Rules; inactive Rules stay
-  unique and management-visible but are invisible to evaluation. Deactivate /
-  reactivate / update-effect are idempotent and typed not-found on a missing
-  identity; create against an existing natural identity is a typed conflict.
-- **Replacement**: `replaceDimensionRules()` defines the complete desired
-  active set for one Subject + dimension, reuses/reactivates existing
-  identities, creates missing identities, deactivates omitted active Rules
-  (never hard-deletes), preserves omitted inactive Rules, and leaves other
-  dimensions/Subjects untouched.
-- **Batch**: duplicate Subjects rejected, empty batch valid, results in
-  accepted input order, single and batch evaluation equivalent, bounded bulk
-  loading with no canonical N+1 path.
-
-## Architecture Guarantees
-
-- **Canonical identity:** `subject_type + subject_id + dimension_key +
-  dimension_value` is the one natural identity, independent of effect and
-  lifecycle. Canonical strings reject null/non-string/coerced input, malformed
-  UTF-8, empty/whitespace-only values, and leading/trailing whitespace without
-  trimming, case conversion, transliteration, or normalization.
-- **Canonical ordering:** string comparison and ordering use ascending
-  bytewise ordering over the validated UTF-8 byte sequence, independent of
-  database row order or collation.
-- **Framework neutrality:** direct PDO persistence only; no ORM, no external
-  query builder, no framework runtime requirement, and no Host foreign keys or
-  joins. The Host validates external identities; the package trusts them.
-- **Transaction ownership:** `PdoSavepointTransactionRunner` from
-  `maatify/persistence` owns the transaction lifecycle when no outer
-  transaction is active. Inside a Host-owned outer transaction it creates an
-  operation-local savepoint, releases it on success, and rolls back to it on
-  failure without committing or fully rolling back the Host transaction.
-  Eligibility still owns mutation coordination, and the runner plus all
-  Eligibility PDO adapters MUST use the same PDO connection.
-- **Concurrency:** parallel creates cannot duplicate a natural identity;
-  parallel replacements cannot produce partial or mixed dimension state; reads
-  observe coherent committed states.
-
-## Exception and Error Propagation
-
-- Package typified failures use the single marker
-  `Maatify\Eligibility\Exception\EligibilityExceptionInterface` and the shared
-  `maatify/exceptions` hierarchy.
-- Duplicate natural identities classify to `RuleIdentityConflictException`;
-  missing identities to `RuleNotFoundException`; unresolved uniqueness or
-  concurrency conditions to `RuleConcurrencyConflictException`.
-- Unknown `PDOException`/`Throwable` instances propagate unchanged; a known
-  semantic condition is converted to a package exception only on documented
-  driver-specific evidence, preserving the original as `previous`.
-
-## Security and Trust Boundaries
-
-- No repository secrets in baseline CI; integration credentials are temporary
-  and local to the runner/service container only.
-- CI actions are pinned to immutable full commit SHAs. The workflow-lint tool
-  (`actionlint` pinned to `v1.7.12`) is downloaded from its release and
-  verified against the published SHA-256 checksum file before execution; the
-  Composer security audit runs as part of the Composer gate.
-- The package never reads Host application databases, schemas, or credentials,
-  and never requires Host-side mutations or setup scripts at install time.
+Apply the schema before creating the runtime. The Host owns access control,
+tenant isolation, PDO configuration, and any outer transaction. See the
+[Package Reference](ELIGIBILITY_PACKAGE_REFERENCE.md) for rule evaluation,
+transaction participation, and the typed errors returned by the package.
 
 ## Documentation
 
@@ -406,7 +279,7 @@ evaluation-read, and internal mutation-support responsibilities explicit inside
 the schema, and may own an outer transaction; the factory builds both service
 graphs over that exact PDO. Direct adapter/service construction remains an
 advanced extension path. Generic transaction/savepoint mechanics belong to
-`maatify/persistence`; per-Subject coordination locking remains
+`maatify/php-persistence`; per-Subject coordination locking remains
 Eligibility-owned.
 
 ## Quality Status
@@ -449,42 +322,13 @@ Docker daemon with `docker compose`, PHP `^8.4`, and `pdo_mysql`. Each real
 service command provisions and tears down its own disposable Compose project
 with a dynamic loopback-only MySQL port; manual service startup is not needed.
 
-The latest-compatible Composer policy sequence corresponding to `ci-quality` is:
-
-```bash
-composer --version | grep -Eq '^Composer version 2\.10\.'
-composer validate --strict
-composer check:composer-policy
-composer update --no-interaction --prefer-dist --no-progress
-composer check-platform-reqs
-composer dump-autoload --optimize --strict-psr
-composer audit --no-interaction --abandoned=fail
-```
-
-The lowest-supported dependency sequence corresponding to `ci-tests` must be
-run separately because it rewrites `vendor/`:
-
-```bash
-composer update --prefer-lowest --prefer-stable --no-interaction --prefer-dist --no-progress
-composer check-platform-reqs
-composer test:unit
-composer test:golden
-composer analyse
-```
-
-`tools/check-local.sh` requires Composer `2.10.x` and runs the local static,
-policy, Unit, and Golden gates, but it intentionally does not perform either
-dependency-resolution matrix. Run the latest-compatible and lowest-supported
-sequences above when validating full local CI parity.
-
-Generated files such as `vendor/`, `composer.lock` (this library does not
-track it), and PHPUnit/PHPStan caches are not committed.
+CI checks the actual PHP patch floor with `php tools/check-php-floor.php`
+on PHP 8.4 and 8.5. The [contributing guide](CONTRIBUTING.md) documents the
+latest-compatible and lowest-supported dependency runs.
 
 ## License
 
-This package is released under a **proprietary Maatify license**. See
-[LICENSE](LICENSE). The target Pre-Stable `v1.0.0-rc.2` source/release line is
-prepared for its intended [Packagist distribution channel](https://packagist.org/packages/maatify/php-eligibility).
+Use requires a separate written license from Maatify. See [LICENSE](LICENSE).
 
 ## Author
 

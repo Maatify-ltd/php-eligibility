@@ -67,5 +67,5 @@ change the package's Eligibility business or evaluation semantics.
 
 - B1 structural and invariant failures now use a typed Eligibility exception backed by the shared Maatify validation hierarchy, `RuleReference` now exposes the canonical direct fields, and the runtime PCRE extension contract is declared.
 
-[1.0.0-rc.2]: https://github.com/Maatify/php-eligibility/releases/tag/v1.0.0-rc.2
-[1.0.0-rc.1]: https://github.com/Maatify/php-eligibility/releases/tag/v1.0.0-rc.1
+[1.0.0-rc.2]: https://github.com/Maatify-ltd/php-eligibility/releases/tag/v1.0.0-rc.2
+[1.0.0-rc.1]: https://github.com/Maatify-ltd/php-eligibility/releases/tag/v1.0.0-rc.1

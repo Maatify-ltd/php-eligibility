@@ -13,7 +13,7 @@ release exists.
 ## Package identity and boundaries
 
 - Package: `maatify/php-eligibility`, repository
-  `https://github.com/Maatify/php-eligibility`.
+  `https://github.com/Maatify-ltd/php-eligibility`.
 - This is a standalone, framework-neutral eligibility library for PHP `^8.4`.
   Runtime contracts are the canonical source of truth:
   [`ELIGIBILITY_PACKAGE_REFERENCE.md`](ELIGIBILITY_PACKAGE_REFERENCE.md).
@@ -130,6 +130,6 @@ own disposable Compose state.
 ## Security reporting route
 
 Report suspected vulnerabilities privately via the
-[GitHub Security Advisories](https://github.com/Maatify/php-eligibility/security/advisories/new)
+[GitHub Security Advisories](https://github.com/Maatify-ltd/php-eligibility/security/advisories/new)
 channel described in [SECURITY.md](SECURITY.md). Do not file them as public
 issues.

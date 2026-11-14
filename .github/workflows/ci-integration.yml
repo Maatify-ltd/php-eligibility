@@ -35,6 +35,8 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: pdo_mysql
           coverage: none
+      - name: Verify actual PHP security patch floor
+        run: php tools/check-php-floor.php
       - name: Resolve current compatible dependencies
         run: composer update --no-interaction --prefer-dist --no-progress
       - name: Unit suite

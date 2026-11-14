@@ -24,9 +24,9 @@ use Maatify\Eligibility\Management\Repository\RuleMutationSupportInterface;
 use Maatify\Eligibility\ValueObject\Rule;
 use Maatify\Eligibility\ValueObject\RuleIdentity;
 use Maatify\Eligibility\Enum\RuleLifecycleEnum;
-use Maatify\Persistence\Pdo\Pagination\PageRequest;
-use Maatify\Persistence\Pdo\Pagination\PageResult;
-use Maatify\Persistence\Pdo\Transaction\SavepointTransactionRunnerInterface;
+use Maatify\PhpPersistence\Pagination\Criteria\PageRequest;
+use Maatify\PhpPersistence\Pagination\DTO\PageResultDTO;
+use Maatify\PhpPersistence\Transaction\Repository\SavepointTransactionRunnerInterface;
 
 /**
  * Application boundary for Rule inspection and lifecycle mutations.
@@ -65,9 +65,9 @@ final class EligibilityManagementService implements EligibilityManagementService
     /**
      * Reads one canonically ordered page selected by the supplied management criteria.
      *
-     * @return PageResult<Rule>
+     * @return PageResultDTO<Rule>
      */
-    public function inspectRules(RuleCriteria $criteria, PageRequest $pageRequest): PageResult
+    public function inspectRules(RuleCriteria $criteria, PageRequest $pageRequest): PageResultDTO
     {
         $this->assertCanonicalDimensionKeySort($pageRequest);
 
@@ -77,12 +77,12 @@ final class EligibilityManagementService implements EligibilityManagementService
     /**
      * Returns one canonically ordered page of active dimension keys for a Subject.
      *
-     * @return PageResult<ActiveDimensionKeyDTO>
+     * @return PageResultDTO<ActiveDimensionKeyDTO>
      */
     public function inspectActiveDimensionKeys(
         ActiveDimensionKeysCriteria $query,
         PageRequest $pageRequest,
-    ): PageResult {
+    ): PageResultDTO {
         $this->assertCanonicalDimensionKeySort($pageRequest);
 
         return $this->managementQuery->findActiveDimensionKeys($query, $pageRequest);

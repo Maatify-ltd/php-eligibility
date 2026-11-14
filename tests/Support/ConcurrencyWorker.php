@@ -16,7 +16,7 @@ use Maatify\Eligibility\Enum\RuleEffectEnum;
 use Maatify\Eligibility\Tests\Support\ConcurrencyTimeout;
 use Maatify\Eligibility\Tests\Support\IntegrationDatabase;
 use Maatify\Eligibility\ValueObject\Subject;
-use Maatify\Persistence\Pdo\Transaction\PdoSavepointTransactionRunner;
+use Maatify\PhpPersistence\Transaction\Repository\PdoSavepointTransactionRunner;
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 require_once __DIR__ . '/ConcurrencyTimeout.php';

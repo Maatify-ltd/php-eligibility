@@ -6,7 +6,7 @@
         "maatify",
         "php"
     ],
-    "homepage": "https://github.com/Maatify/php-eligibility",
+    "homepage": "https://github.com/Maatify-ltd/php-eligibility",
     "type": "library",
     "license": "proprietary",
     "authors": [
@@ -17,8 +17,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/Maatify/php-eligibility/issues",
-        "source": "https://github.com/Maatify/php-eligibility"
+        "issues": "https://github.com/Maatify-ltd/php-eligibility/issues",
+        "source": "https://github.com/Maatify-ltd/php-eligibility"
     },
     "autoload": {
         "psr-4": {
@@ -35,7 +35,7 @@
         "ext-pdo": "*",
         "ext-pdo_mysql": "*",
         "maatify/exceptions": "^1.0",
-        "maatify/persistence": "^1.4",
+        "maatify/php-persistence": ">=1.0.0-rc.1 <=1.0.0-rc.1",
         "php": "^8.4"
     },
     "require-dev": {

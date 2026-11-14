@@ -25,9 +25,9 @@ use Maatify\Eligibility\ValueObject\RuleIdentity;
 use Maatify\Eligibility\Enum\RuleLifecycleEnum;
 use Maatify\Eligibility\ValueObject\Subject;
 use Maatify\Eligibility\ValueObject\SubjectCollection;
-use Maatify\Persistence\Pdo\Pagination\PageRequest;
-use Maatify\Persistence\Pdo\Pagination\PageResult;
-use Maatify\Persistence\Pdo\Pagination\SortDirectionEnum;
+use Maatify\PhpPersistence\Pagination\Criteria\PageRequest;
+use Maatify\PhpPersistence\Pagination\DTO\PageResultDTO;
+use Maatify\PhpPersistence\Pagination\Enum\SortDirectionEnum;
 
 /**
  * Deterministic test double for the shared in-memory persistence state.
@@ -85,7 +85,7 @@ final class InMemoryRuleRepository implements
     }
 
     /** @param PageRequest $pageRequest Unused: this double always returns one fixed page of the complete result. */
-    public function findByCriteria(RuleCriteria $criteria, PageRequest $pageRequest): PageResult
+    public function findByCriteria(RuleCriteria $criteria, PageRequest $pageRequest): PageResultDTO
     {
         $total = 0;
         $matching = [];
@@ -138,7 +138,7 @@ final class InMemoryRuleRepository implements
     public function findActiveDimensionKeys(
         ActiveDimensionKeysCriteria $query,
         PageRequest $pageRequest,
-    ): PageResult {
+    ): PageResultDTO {
         /** @var array<string, true> $keys */
         $keys = [];
         foreach ($this->rules as $rule) {
@@ -251,16 +251,16 @@ final class InMemoryRuleRepository implements
      *
      * @template T of array<array-key, mixed>|object
      * @param list<T> $orderedItems
-     * @return PageResult<T>
+     * @return PageResultDTO<T>
      */
-    private function fixedSinglePageResult(array $orderedItems, int $total): PageResult
+    private function fixedSinglePageResult(array $orderedItems, int $total): PageResultDTO
     {
         $filtered = count($orderedItems);
         if ($filtered === 0) {
-            return new PageResult([], 1, 20, $total, 0, 0, false, false, 'dimension_key', SortDirectionEnum::ASC);
+            return new PageResultDTO([], 1, 20, $total, 0, 0, false, false, 'dimension_key', SortDirectionEnum::ASC);
         }
 
-        return new PageResult(
+        return new PageResultDTO(
             $orderedItems,
             1,
             $filtered,

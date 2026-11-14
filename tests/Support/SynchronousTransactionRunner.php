@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Maatify\Eligibility\Tests\Support;
 
-use Maatify\Persistence\Pdo\Transaction\SavepointTransactionRunnerInterface;
+use Maatify\PhpPersistence\Transaction\Repository\SavepointTransactionRunnerInterface;
 
 /**
  * Minimal unit-test seam for proving service delegation without reimplementing

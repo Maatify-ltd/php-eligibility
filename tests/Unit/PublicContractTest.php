@@ -49,11 +49,11 @@ use Maatify\Exceptions\Exception\Conflict\ConflictMaatifyException;
 use Maatify\Exceptions\Exception\MaatifyException;
 use Maatify\Exceptions\Exception\NotFound\NotFoundMaatifyException;
 use Maatify\Exceptions\Exception\System\SystemMaatifyException;
-use Maatify\Persistence\Pdo\Pagination\PageResult;
-use Maatify\Persistence\Pdo\Transaction\PdoSavepointTransactionRunner;
-use Maatify\Persistence\Pdo\Transaction\PdoTransactionRunner;
-use Maatify\Persistence\Pdo\Transaction\SavepointTransactionRunnerInterface;
-use Maatify\Persistence\Pdo\Transaction\TransactionRunnerInterface;
+use Maatify\PhpPersistence\Pagination\DTO\PageResultDTO;
+use Maatify\PhpPersistence\Transaction\Repository\PdoSavepointTransactionRunner;
+use Maatify\PhpPersistence\Transaction\Repository\PdoTransactionRunner;
+use Maatify\PhpPersistence\Transaction\Repository\SavepointTransactionRunnerInterface;
+use Maatify\PhpPersistence\Transaction\Repository\TransactionRunnerInterface;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -325,8 +325,8 @@ final class PublicContractTest extends TestCase
         foreach (
             [
                 'findByIdentity' => Rule::class,
-                'findByCriteria' => PageResult::class,
-                'findActiveDimensionKeys' => PageResult::class,
+                'findByCriteria' => PageResultDTO::class,
+                'findActiveDimensionKeys' => PageResultDTO::class,
                 'summarizeLifecycle' => RuleLifecycleSummaryDTO::class,
             ] as $methodName => $returnType
         ) {
@@ -364,11 +364,11 @@ final class PublicContractTest extends TestCase
             self::namedReturnTypeName($managementService->getMethod('replaceDimensionRules')),
         );
         self::assertSame(
-            PageResult::class,
+            PageResultDTO::class,
             self::namedReturnTypeName($managementService->getMethod('inspectRules')),
         );
         self::assertSame(
-            PageResult::class,
+            PageResultDTO::class,
             self::namedReturnTypeName($managementService->getMethod('inspectActiveDimensionKeys')),
         );
         self::assertSame(

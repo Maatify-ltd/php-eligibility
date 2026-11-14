@@ -22,17 +22,9 @@ defines the meaning of Subject types and Context dimensions, wires the package's
 PDO adapters, manages the package-owned schema, and maps the typed result to its
 own API or UI behavior.
 
-This guide describes the **target Pre-Stable `v1.0.0-rc.2` source/release
-line**:
-
-- package: `maatify/php-eligibility`
-- target release: `v1.0.0-rc.2`
-- stability: Pre-Stable source/release line
-- intended distribution channel: [Packagist](https://packagist.org/packages/maatify/php-eligibility)
-- Published state: repository source alone does not establish it; exact
-  external availability is determined by the exact version tag through the
-  approved Composer distribution source
-- Published Stable: none
+This guide describes the checkout and its shared Persistence RC trial. For
+installed `v1.0.0-rc.2`, see the
+[guide at the published tag](https://github.com/Maatify-ltd/php-eligibility/blob/v1.0.0-rc.2/docs/guides/USAGE_GUIDE.md).
 
 For local development, install dependencies with Composer before running the
 examples:
@@ -288,16 +280,16 @@ direct SQL.
   filtered by dimension key, lifecycle, and effect.
 - **Input:** `RuleCriteria(Subject $subject, ?dimensionKey,
   ?RuleLifecycleEnum $lifecycle, ?RuleEffectEnum $effect)` plus a
-  `Maatify\Persistence\Pdo\Pagination\PageRequest` (page, per-page, sort).
+  `Maatify\PhpPersistence\Pagination\Criteria\PageRequest` (page, per-page, sort).
 - **Public call:** `$management->inspectRules($criteria, $pageRequest)`.
-- **Return type:** `Maatify\Persistence\Pdo\Pagination\PageResult<Rule>`
+- **Return type:** `Maatify\PhpPersistence\Pagination\DTO\PageResultDTO<Rule>`
   (`data`, `page`, `perPage`, `total`, `filtered`, `totalPages`, `hasNext`,
   `hasPrevious`, `sortBy`, `sortDirection`).
 - **Observable behavior:** `total` counts every persisted Rule for the Subject
   before the optional `RuleCriteria` filters; `filtered` counts Rules after
   those filters. Results follow the canonical fixed order: `dimension_key`
   ascending, then `dimension_value` ascending. Page/per-page normalization
-  (default per-page 20, bounds 1–200) is delegated to `maatify/persistence`.
+  (default per-page 20, bounds 1–200) is delegated to `maatify/php-persistence`.
   `PageRequest.sortBy`/`sortDirection` accept only `null` (canonical order) or
   the explicit equivalent `dimension_key` ascending; any other explicit sort
   request raises `InvalidEligibilityInputException` rather than being
@@ -320,7 +312,7 @@ direct SQL.
 - **Input:** `ActiveDimensionKeysCriteria(Subject $subject)` plus a
   `PageRequest`.
 - **Public call:** `$management->inspectActiveDimensionKeys($query, $pageRequest)`.
-- **Return type:** `PageResult<ActiveDimensionKeyDTO>`.
+- **Return type:** `PageResultDTO<ActiveDimensionKeyDTO>`.
 - **Observable behavior:** Only active Rules contribute keys; returned keys are
   distinct and in canonical ascending bytewise order. `total` and `filtered`
   are always equal for this query, because no optional domain filter exists
@@ -481,7 +473,7 @@ These are the types a consumer needs to understand to call the public API.
 - **`ActiveDimensionKeysCriteria`** — Subject query for active dimension keys.
 - **`RuleLifecycleSummaryCriteria`** — Subject and optional exact dimension key
   scope for the lifecycle count summary.
-- **`Maatify\Persistence\Pdo\Pagination\PageRequest`** — page, per-page, and
+- **`Maatify\PhpPersistence\Pagination\Criteria\PageRequest`** — page, per-page, and
   optional sort input shared by both paginated Management reads.
 - **`DesiredRule` / `DesiredRuleCollection`** — desired values and effects for
   one replacement; desired values must be unique and are canonically ordered.
@@ -501,11 +493,11 @@ These are the types a consumer needs to understand to call the public API.
 - **`Rule`** — Subject, dimension key, dimension value, effect, and lifecycle;
   `naturalIdentity()` returns its `RuleIdentity`.
 - **`RuleCollection`** — unique Rules in canonical identity order.
-- **`Maatify\Persistence\Pdo\Pagination\PageResult<T>`** — one page of paginated
+- **`Maatify\PhpPersistence\Pagination\DTO\PageResultDTO<T>`** — one page of paginated
   Management results (`data`, `page`, `perPage`, `total`, `filtered`,
   `totalPages`, `hasNext`, `hasPrevious`, `sortBy`, `sortDirection`); used for
-  both `inspectRules()` (`PageResult<Rule>`) and `inspectActiveDimensionKeys()`
-  (`PageResult<ActiveDimensionKeyDTO>`).
+  both `inspectRules()` (`PageResultDTO<Rule>`) and `inspectActiveDimensionKeys()`
+  (`PageResultDTO<ActiveDimensionKeyDTO>`).
 - **`ActiveDimensionKeyDTO`** — one canonical active dimension key.
 - **`RuleLifecycleSummaryDTO`** — `totalRules`/`activeRules`/`inactiveRules`
   count summary; `totalRules === activeRules + inactiveRules`.

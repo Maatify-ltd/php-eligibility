@@ -25,7 +25,7 @@ use Maatify\Eligibility\Enum\RuleLifecycleEnum;
 use Maatify\Eligibility\Tests\Support\InMemoryRuleRepository;
 use Maatify\Eligibility\Tests\Support\SynchronousTransactionRunner;
 use Maatify\Eligibility\ValueObject\Subject;
-use Maatify\Persistence\Pdo\Pagination\PageRequest;
+use Maatify\PhpPersistence\Pagination\Criteria\PageRequest;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
