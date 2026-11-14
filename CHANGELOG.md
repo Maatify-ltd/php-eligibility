@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Require PHP 8.4.27 or later in the 8.4 series, or PHP 8.5.12 or later in the 8.5 series. This narrows the published RC.2 PHP constraint for the planned RC.3.
+
 - Migrate pagination and savepoint handling to `maatify/php-persistence 1.0.0-rc.1`. Advanced integrations using shared pagination or transaction types must update those imports.
 - Adopt the current engineering standards and refresh repository documentation.
 

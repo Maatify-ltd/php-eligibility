@@ -19,7 +19,7 @@
         "ext-pdo_mysql": "*",
         "maatify/php-eligibility": "dev-rc2-current-source",
         "maatify/php-persistence": "1.0.0-rc.1@RC",
-        "php": "^8.4"
+        "php": ">=8.4.27 <8.5.0 || >=8.5.12 <8.6.0"
     },
     "minimum-stability": "stable",
     "prefer-stable": true

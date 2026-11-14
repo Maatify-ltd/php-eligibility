@@ -14,7 +14,7 @@ release exists.
 
 - Package: `maatify/php-eligibility`, repository
   `https://github.com/Maatify-ltd/php-eligibility`.
-- This is a standalone, framework-neutral eligibility library for PHP `^8.4`.
+- This is a standalone, framework-neutral eligibility library for PHP `8.4.27+` on PHP 8.4 or `8.5.12+` on PHP 8.5.
   Runtime contracts are the canonical source of truth:
   [`ELIGIBILITY_PACKAGE_REFERENCE.md`](ELIGIBILITY_PACKAGE_REFERENCE.md).
 - The package owns `src/` (production API) and the schema asset in `schema/`.
@@ -35,7 +35,7 @@ release exists.
 
 ## Local verification commands
 
-Prerequisites: PHP `^8.4`, Composer, Docker for the real MySQL fixture.
+Prerequisites: PHP `8.4.27+` on PHP 8.4 or `8.5.12+` on PHP 8.5, Composer, Docker for the real MySQL fixture.
 
 The repository development and verification workflow requires Composer `2.10.x`.
 This is a development-tooling policy only; it is not a package runtime or

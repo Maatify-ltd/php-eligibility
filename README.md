@@ -11,7 +11,7 @@
 **Package status:**<br>
 [![Release state](https://img.shields.io/badge/Status-Release%20Candidate-orange)](#status)
 [![Version](https://img.shields.io/packagist/v/maatify/php-eligibility?include_prereleases&label=Version&color=orange)](https://packagist.org/packages/maatify/php-eligibility)
-[![PHP](https://img.shields.io/badge/PHP-%5E8.4-8892BF)](composer.json)
+[![PHP](https://img.shields.io/badge/PHP-8.4.27%2B%20%2F%208.5.12%2B-8892BF)](composer.json)
 [![License](https://img.shields.io/badge/License-proprietary-lightgrey)](LICENSE)
 [![PHPStan](https://img.shields.io/badge/PHPStan-level%20max-success)](phpstan.neon)
 
@@ -91,7 +91,7 @@ for the installed release's API.
 
 | Requirement | Constraint |
 |---|---|
-| PHP | `^8.4` |
+| PHP | `8.4.27+` on PHP 8.4 or `8.5.12+` on PHP 8.5 |
 | PHP extensions | `ext-pdo`, `ext-pdo_mysql`, `ext-pcre` |
 | Runtime packages | `maatify/exceptions` (`^1.0`), `maatify/php-persistence` (checkout trial `1.0.0-rc.1`) |
 | Database | MySQL-compatible database-server semantics through direct PDO (capability-based; no minimum product version is declared — see [Persistence and Schema](#persistence-and-schema)) |
@@ -110,7 +110,7 @@ executed MariaDB verification.
 
 ## Installation
 
-Install the published RC:
+Install the published RC.2, which keeps its PHP `^8.4` constraint:
 
 ```bash
 composer require maatify/php-eligibility:1.0.0-rc.2@RC
@@ -300,7 +300,7 @@ Eligibility-owned.
 
 ## Development and Testing
 
-Prerequisites: PHP `^8.4`, Composer, Docker (for the real MySQL fixture).
+Prerequisites: PHP `8.4.27+` on PHP 8.4 or `8.5.12+` on PHP 8.5, Composer, Docker (for the real MySQL fixture).
 
 The repository development and verification workflow requires Composer `2.10.x`;
 this is a tooling policy only and is not a runtime or consumer install
@@ -322,7 +322,7 @@ composer test:examples                     # focused fresh standalone-example sm
 ```
 
 The maintained verification commands require Composer `2.10.x`, a working
-Docker daemon with `docker compose`, PHP `^8.4`, and `pdo_mysql`. Each real
+Docker daemon with `docker compose`, PHP `8.4.27+` on PHP 8.4 or `8.5.12+` on PHP 8.5, and `pdo_mysql`. Each real
 service command provisions and tears down its own disposable Compose project
 with a dynamic loopback-only MySQL port; manual service startup is not needed.
 
