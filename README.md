@@ -20,7 +20,6 @@
 [![Monthly Downloads](https://img.shields.io/packagist/dm/maatify/php-eligibility?label=Monthly%20Downloads)](https://packagist.org/packages/maatify/php-eligibility)
 [![Total Downloads](https://img.shields.io/packagist/dt/maatify/php-eligibility?label=Total%20Downloads)](https://packagist.org/packages/maatify/php-eligibility)
 [![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-blueviolet)](https://github.com/Maatify-ltd)
-[![Install](https://img.shields.io/badge/Install-1.0.0--rc.3-blue)](#installation)
 
 **Documentation:**<br>
 [![Changelog](https://img.shields.io/badge/Changelog-View-blue)](CHANGELOG.md)
