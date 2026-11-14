@@ -4,13 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Migrate pagination and savepoint handling to `maatify/php-persistence 1.0.0-rc.1`. Advanced integrations using shared pagination or transaction types must update those imports.
+- Adopt the current engineering standards and refresh repository documentation.
+
 ## [1.0.0-rc.2] - 2026-09-28
 
-This entry describes the release payload prepared for `v1.0.0-rc.2`. This
-entry's heading, date, and release-tag link identify the intended release
-target; they are not publication evidence by themselves. Published state is
-established only when the exact version is externally resolvable and
-installable through the approved Composer distribution source.
+Published on [Packagist](https://packagist.org/packages/maatify/php-eligibility).
 
 ### Added
 

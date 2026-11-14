@@ -1,7 +1,7 @@
 # Code of Conduct — maatify/php-eligibility
 
 [![Maatify Eligibility](https://img.shields.io/badge/Maatify-Eligibility-blue?style=for-the-badge)](https://github.com/Maatify-ltd/php-eligibility)
-[![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-9C27B0?style=for-the-badge)](https://github.com/Maatify)
+[![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-9C27B0?style=for-the-badge)](https://github.com/Maatify-ltd)
 
 ## Our Pledge
 

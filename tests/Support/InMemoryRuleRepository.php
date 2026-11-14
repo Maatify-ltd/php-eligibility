@@ -37,7 +37,7 @@ use Maatify\PhpPersistence\Pagination\Enum\SortDirectionEnum;
  * fields entirely. This double intentionally does not implement page
  * normalization, per-page normalization, out-of-range handling, offset
  * calculation, or real total-pages/has-next/has-previous computation; those
- * mechanics are owned by `maatify/persistence` and are proven only against
+ * mechanics are owned by `maatify/php-persistence` and are proven only against
  * the real PDO adapter in Integration evidence.
  */
 final class InMemoryRuleRepository implements

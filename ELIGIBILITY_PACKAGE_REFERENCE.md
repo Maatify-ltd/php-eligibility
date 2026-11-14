@@ -2,8 +2,9 @@
 
 ## Status
 
-This document is the canonical RC2 public/runtime/behavioral contract for
-`maatify/php-eligibility` and owns the complete Public Runtime API inventory.
+This document owns the checkout’s public behavior and complete Public Runtime
+API inventory. It includes the new shared Persistence RC trial. For published
+`v1.0.0-rc.2`, use the [reference at that tag](https://github.com/Maatify-ltd/php-eligibility/blob/v1.0.0-rc.2/ELIGIBILITY_PACKAGE_REFERENCE.md).
 
 The RC2 implementation MUST conform to the boundaries, invariants, decision semantics, lifecycle rules, ordering rules, and operational contracts defined here. Changes to these semantics require an explicit documentation decision before implementation changes are accepted.
 
