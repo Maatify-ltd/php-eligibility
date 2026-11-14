@@ -9,18 +9,18 @@
 </picture>
 
 **Package status:**<br>
-[![Release state](https://img.shields.io/badge/Status-Release%20Candidate-orange)](#status)
-[![Version](https://img.shields.io/packagist/v/maatify/php-eligibility?include_prereleases&label=Version&color=orange)](https://packagist.org/packages/maatify/php-eligibility)
+[![Release state](https://img.shields.io/badge/Status-RC%20Preparation-orange)](#status)
+[![Version](https://img.shields.io/badge/Target-1.0.0--rc.3-orange)](#status)
 [![PHP](https://img.shields.io/badge/PHP-8.4.27%2B%20%2F%208.5.12%2B-8892BF)](composer.json)
 [![License](https://img.shields.io/badge/License-proprietary-lightgrey)](LICENSE)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%20max-success)](phpstan.neon)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%20max-success)](https://github.com/Maatify-ltd/php-eligibility/actions/workflows/ci-quality.yml)
 
 **Registry and usage:**<br>
 [![Packagist](https://img.shields.io/badge/Packagist-package-blue)](https://packagist.org/packages/maatify/php-eligibility)
 [![Monthly Downloads](https://img.shields.io/packagist/dm/maatify/php-eligibility?label=Monthly%20Downloads)](https://packagist.org/packages/maatify/php-eligibility)
 [![Total Downloads](https://img.shields.io/packagist/dt/maatify/php-eligibility?label=Total%20Downloads)](https://packagist.org/packages/maatify/php-eligibility)
 [![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-blueviolet)](https://github.com/Maatify-ltd)
-[![Install](https://img.shields.io/packagist/v/maatify/php-eligibility?include_prereleases&label=Install&color=blue)](https://packagist.org/packages/maatify/php-eligibility)
+[![Install](https://img.shields.io/badge/Install-1.0.0--rc.3-blue)](#installation)
 
 **Documentation:**<br>
 [![Changelog](https://img.shields.io/badge/Changelog-View-blue)](CHANGELOG.md)
@@ -58,9 +58,11 @@ for the installed release's API.
 
 ## Status
 
-- **Published RC:** [v1.0.0-rc.2](https://packagist.org/packages/maatify/php-eligibility).
+- **Release artifact target:** `1.0.0-rc.3` (Release Candidate).
+- **Publication state at preparation:** `1.0.0-rc.3` unpublished.
+- **Published RC at preparation:** [v1.0.0-rc.2](https://packagist.org/packages/maatify/php-eligibility).
 - **Published Stable:** None.
-- **Checkout:** Trials the new shared Persistence package.
+- **Persistence:** Trials the new shared Persistence package.
 
 ## Key Features
 
@@ -110,13 +112,16 @@ executed MariaDB verification.
 
 ## Installation
 
-Install the published RC.2, which keeps its PHP `^8.4` constraint:
+After `1.0.0-rc.3` is published, install the exact target in the consumer
+project. The root project explicitly allows the Persistence RC while keeping
+Composer's default minimum stability.
 
 ```bash
-composer require maatify/php-eligibility:1.0.0-rc.2@RC
+composer require maatify/php-eligibility:1.0.0-rc.3@RC maatify/php-persistence:1.0.0-rc.1@RC
 ```
 
-The remaining API examples on this page describe the checkout.
+For RC.2, use the [published RC.2 guide](https://github.com/Maatify-ltd/php-eligibility/tree/v1.0.0-rc.2)
+and its PHP `^8.4` requirements.
 
 ### Development access
 

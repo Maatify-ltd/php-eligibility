@@ -133,3 +133,7 @@ Report suspected vulnerabilities privately via the
 [GitHub Security Advisories](https://github.com/Maatify-ltd/php-eligibility/security/advisories/new)
 channel described in [SECURITY.md](SECURITY.md). Do not file them as public
 issues.
+
+Run `tools/check-composer-php-boundaries.sh` to check the PHP constraint using Composer.
+Run `tools/check-release-archives.sh <commit>` from a Git checkout to inspect both
+release archives for that commit. With no argument, the command uses `HEAD`.

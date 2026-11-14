@@ -22,7 +22,7 @@ defines the meaning of Subject types and Context dimensions, wires the package's
 PDO adapters, manages the package-owned schema, and maps the typed result to its
 own API or UI behavior.
 
-This guide describes the checkout and its shared Persistence RC trial. For
+This guide describes the RC.3 target and its shared Persistence RC trial. For
 installed `v1.0.0-rc.2`, see the
 [guide at the published tag](https://github.com/Maatify-ltd/php-eligibility/blob/v1.0.0-rc.2/docs/guides/USAGE_GUIDE.md).
 

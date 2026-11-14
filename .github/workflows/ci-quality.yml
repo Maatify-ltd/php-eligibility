@@ -41,6 +41,10 @@ jobs:
         run: composer validate --strict
       - name: Verify Composer policy contract
         run: env -u COMPOSER_NO_AUDIT composer check:composer-policy
+      - name: Verify Composer PHP constraint boundaries
+        run: tools/check-composer-php-boundaries.sh
+      - name: Verify Git and Composer release archives
+        run: tools/check-release-archives.sh
       - name: Resolve current compatible dependencies
         run: |
           env -u COMPOSER_NO_AUDIT composer update \

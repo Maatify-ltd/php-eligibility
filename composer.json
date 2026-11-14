@@ -79,6 +79,9 @@
             }
         }
     },
+    "archive": {
+        "exclude": ["/.git"]
+    },
     "minimum-stability": "stable",
     "prefer-stable": true
 }

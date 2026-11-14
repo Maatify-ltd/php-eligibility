@@ -2,7 +2,7 @@
 
 ## Status
 
-This document owns the checkout’s public behavior and complete Public Runtime
+This document owns the RC.3 target’s public behavior and complete Public Runtime
 API inventory. It includes the new shared Persistence RC trial. For published
 `v1.0.0-rc.2`, use the [reference at that tag](https://github.com/Maatify-ltd/php-eligibility/blob/v1.0.0-rc.2/ELIGIBILITY_PACKAGE_REFERENCE.md).
 

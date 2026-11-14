@@ -61,6 +61,7 @@ fi
 run_step "Composer 2.10 capability" require_composer_210
 run_step "Composer validation" composer validate --strict
 run_step "Composer policy contract" composer check:composer-policy
+run_step "Composer PHP constraint boundaries" tools/check-composer-php-boundaries.sh
 run_step "Optimized strict PSR-4 autoload" composer dump-autoload --optimize --strict-psr
 run_step "Platform requirements" composer check-platform-reqs
 run_step "PHP syntax lint" php tools/php-lint.php
