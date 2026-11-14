@@ -5,7 +5,7 @@ It explains what the package provides, which public API surface to choose, what
 to send, what to receive, and which responsibilities remain with the Host.
 
 The root [Package Reference](../../ELIGIBILITY_PACKAGE_REFERENCE.md) remains
-the canonical RC2 public/runtime/behavioral contract and complete Public Runtime
+the canonical RC.3 public/runtime/behavioral contract and complete Public Runtime
 API inventory. This guide does not replace it or repeat
 its full acceptance matrix.
 
@@ -509,7 +509,7 @@ presentation text in the Host.
 
 ## Production PDO wiring
 
-The RC2 persistence implementation is direct PDO. The recommended production
+The RC.3 persistence implementation is direct PDO. The recommended production
 construction path accepts a Host-created PDO and uses the package factory:
 
 ```php

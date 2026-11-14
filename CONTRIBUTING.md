@@ -1,14 +1,7 @@
 # Contributing Guide
 
-Thank you for contributing to `maatify/php-eligibility`. This repository
-currently targets the Pre-Stable `v1.0.0-rc.2` source/release line in the
-intended Stable `1.0` line. Its package identity is `maatify/php-eligibility`;
-Packagist is the intended distribution channel.
-
-Repository source alone does not establish Published state; exact external
-availability is determined by the exact `v1.0.0-rc.2` version tag through the
-approved Composer distribution source, not by this guide. No Published Stable
-release exists.
+The repository is preparing `1.0.0-rc.3` for Packagist. See the
+[README](README.md#status) for the release target and publication status.
 
 ## Package identity and boundaries
 
@@ -29,7 +22,7 @@ release exists.
 - Code changes: open a pull request; see expectations below.
 - Documentation/presentation improvements: PRs are welcome, but they must not
   change runtime contracts and must stay accurate to the actual state
-  (including the current Pre-Stable `v1.0.0-rc.2` source/release-line state).
+  of the documented release target.
 - Vulnerability reports: use the private route documented in
   [SECURITY.md](SECURITY.md), never a public issue.
 
@@ -137,3 +130,6 @@ issues.
 Run `tools/check-composer-php-boundaries.sh` to check the PHP constraint using Composer.
 Run `tools/check-release-archives.sh <commit>` from a Git checkout to inspect both
 release archives for that commit. With no argument, the command uses `HEAD`.
+For pre-publication RC.3 qualification, run
+`tools/check-release-archives.sh --qualify-rc3 <commit>` to verify the release
+presentation, including the undated CHANGELOG heading.

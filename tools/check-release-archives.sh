@@ -2,6 +2,15 @@
 set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
+qualify=false
+if [[ "${1:-}" == '--qualify-rc3' ]]; then
+    qualify=true
+    shift
+fi
+if [[ "$#" -gt 1 || "${1:-}" == -* ]]; then
+    echo "Usage: $0 [--qualify-rc3] [commit]" >&2
+    exit 2
+fi
 candidate="$(git rev-parse --verify "${1:-HEAD}^{commit}")"
 scratch="$(mktemp -d)"
 cleanup() {
@@ -33,8 +42,14 @@ for producer in git composer; do
     while IFS= read -r path; do
         cmp "$scratch/checkout/$path" "$archive_root/$path"
     done < "$scratch/source-files"
-    grep -Fq 'composer require maatify/php-eligibility:1.0.0-rc.3@RC maatify/php-persistence:1.0.0-rc.1@RC' "$archive_root/README.md"
-    grep -Fxq '## [1.0.0-rc.3]' "$archive_root/CHANGELOG.md"
-    grep -Fq 'This artifact targets `v1.0.0-rc.3`' "$archive_root/SECURITY.md"
+    if [[ "$qualify" == true ]]; then
+        grep -Fq 'composer require maatify/php-eligibility:1.0.0-rc.3@RC maatify/php-persistence:1.0.0-rc.1@RC' "$archive_root/README.md"
+        grep -Fxq '## [1.0.0-rc.3]' "$archive_root/CHANGELOG.md" || {
+            echo "$producer archive requires an undated RC.3 CHANGELOG heading for qualification" >&2
+            exit 1
+        }
+        grep -Fq 'This artifact targets `v1.0.0-rc.3`' "$archive_root/SECURITY.md"
+        printf '%s archive RC.3 presentation PASS\n' "$producer"
+    fi
     printf '%s archive PASS for %s (%s runtime files)\n' "$producer" "$candidate" "$(wc -l < "$scratch/source-files" | tr -d ' ')"
 done

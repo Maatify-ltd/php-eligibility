@@ -264,7 +264,7 @@ installing or trying the package.
 | [Usage Guide](docs/guides/USAGE_GUIDE.md) | Consumer-facing API guide, capability decision map, input/output types, transaction notes, and links to runnable examples. |
 | [Runnable Examples](examples/) | Standalone public-API examples for evaluation, batch evaluation, management, replacement, PDO wiring, and typed exception handling. |
 | [Schema](schema/README.md) | Persistence contract, tables, bounds, applying/reapplying, and the local MySQL fixture. |
-| [CHANGELOG](CHANGELOG.md) | RC2 release delta and historical release history. |
+| [CHANGELOG](CHANGELOG.md) | RC.3 target and release history. |
 | [Security Policy](SECURITY.md) | Support state, vulnerability reporting, and scope. |
 | [Contributing Guide](CONTRIBUTING.md) | Contribution expectations, local verification, and PR requirements. |
 | [Code of Conduct](CODE_OF_CONDUCT.md) | Community rules and reporting. |
