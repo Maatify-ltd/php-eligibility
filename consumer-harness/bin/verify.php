@@ -31,10 +31,17 @@ $packageName = 'maatify/php-eligibility';
 $persistence = 'maatify/php-persistence';
 if (!InstalledVersions::isInstalled($persistence)
     || InstalledVersions::getPrettyVersion($persistence) !== 'v1.0.0-rc.1'
+    || InstalledVersions::getReference($persistence) !== '34c3b874525d36ae064c162cdd553bc75d18772b'
     || InstalledVersions::isInstalled('maatify/persistence')
 ) {
-    fail('The consumer must resolve the exact new Persistence RC without the legacy package.');
+    fail('The consumer must resolve the verified Persistence RC version and revision without the legacy package.');
 }
+printf(
+    "PERSISTENCE_TRIAL=%s@%s (%s)\n",
+    $persistence,
+    InstalledVersions::getPrettyVersion($persistence),
+    InstalledVersions::getReference($persistence),
+);
 
 $installedVersion = InstalledVersions::getPrettyVersion($packageName);
 if ($installedVersion !== 'dev-rc2-current-source') {
