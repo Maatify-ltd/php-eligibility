@@ -93,10 +93,10 @@ for the documentation shipped with the published release.
 |---|---|
 | PHP | `8.4.27+` on PHP 8.4 or `8.5.12+` on PHP 8.5 |
 | PHP extensions | `ext-pdo`, `ext-pdo_mysql`, `ext-pcre` |
-| Runtime packages | `maatify/exceptions` (`^1.0`), `maatify/php-persistence` (checkout trial `1.0.0-rc.1`) |
+| Runtime packages | `maatify/exceptions` (`^1.0`), `maatify/php-persistence` (`1.0.0-rc.1`) |
 | Database | MySQL-compatible database-server semantics through direct PDO (capability-based; no minimum product version is declared — see [Persistence and Schema](#persistence-and-schema)) |
 
-The checkout trials `maatify/php-persistence 1.0.0-rc.1` for
+Published Eligibility `1.0.0-rc.3` uses `maatify/php-persistence 1.0.0-rc.1` for
 `SavepointTransactionRunnerInterface` and `PdoSavepointTransactionRunner`.
 Eligibility delegates transaction ownership, operation-local savepoints,
 cleanup, and original-`Throwable` preservation to that shared API.

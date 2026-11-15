@@ -1,7 +1,6 @@
 # Contributing Guide
 
-The repository is preparing `1.0.0-rc.3` for Packagist. See the
-[README](README.md#status) for the release target and publication status.
+See the [README](README.md#status) for the current published release and its verification.
 
 ## Package identity and boundaries
 
