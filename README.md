@@ -9,8 +9,8 @@
 </picture>
 
 **Package status:**<br>
-[![Release state](https://img.shields.io/badge/Status-RC%20Preparation-orange)](#status)
-[![Version](https://img.shields.io/badge/Target-1.0.0--rc.3-orange)](#status)
+[![Release state](https://img.shields.io/badge/Status-Release%20Candidate-orange)](#status)
+[![Version](https://img.shields.io/badge/Version-1.0.0--rc.3-orange)](https://packagist.org/packages/maatify/php-eligibility#v1.0.0-rc.3)
 [![PHP](https://img.shields.io/badge/PHP-8.4.27%2B%20%2F%208.5.12%2B-8892BF)](composer.json)
 [![License](https://img.shields.io/badge/License-proprietary-lightgrey)](LICENSE)
 [![PHPStan](https://img.shields.io/badge/PHPStan-level%20max-success)](https://github.com/Maatify-ltd/php-eligibility/actions/workflows/ci-quality.yml)
@@ -20,6 +20,7 @@
 [![Monthly Downloads](https://img.shields.io/packagist/dm/maatify/php-eligibility?label=Monthly%20Downloads)](https://packagist.org/packages/maatify/php-eligibility)
 [![Total Downloads](https://img.shields.io/packagist/dt/maatify/php-eligibility?label=Total%20Downloads)](https://packagist.org/packages/maatify/php-eligibility)
 [![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-blueviolet)](https://github.com/Maatify-ltd)
+[![Install](https://img.shields.io/badge/Install-1.0.0--rc.3-blue)](#installation)
 
 **Documentation:**<br>
 [![Changelog](https://img.shields.io/badge/Changelog-View-blue)](CHANGELOG.md)
@@ -52,16 +53,14 @@ The package knows external identities only. It does not know the database
 model, lifecycle, or implementation of the domains that own those identities.
 
 The [Package Reference](ELIGIBILITY_PACKAGE_REFERENCE.md) documents the
-checkout. See the [published RC documentation](https://github.com/Maatify-ltd/php-eligibility/tree/v1.0.0-rc.2)
-for the installed release's API.
+current API. See the [RC.3 tag](https://github.com/Maatify-ltd/php-eligibility/tree/v1.0.0-rc.3)
+for the documentation shipped with the published release.
 
 ## Status
 
-- **Release artifact target:** `1.0.0-rc.3` (Release Candidate).
-- **Publication state at preparation:** `1.0.0-rc.3` unpublished.
-- **Published RC at preparation:** [v1.0.0-rc.2](https://packagist.org/packages/maatify/php-eligibility).
+- **Published RC:** [`v1.0.0-rc.3` on Packagist](https://packagist.org/packages/maatify/php-eligibility#v1.0.0-rc.3).
 - **Published Stable:** None.
-- **Persistence:** Trials the new shared Persistence package.
+- **Published artifact verification:** [PASS on `bb1dec9`](https://github.com/Maatify-ltd/php-eligibility/pull/42#issuecomment-6886363943).
 
 ## Key Features
 
@@ -111,9 +110,8 @@ executed MariaDB verification.
 
 ## Installation
 
-After `1.0.0-rc.3` is published, install the exact target in the consumer
-project. The root project explicitly allows the Persistence RC while keeping
-Composer's default minimum stability.
+Install `1.0.0-rc.3` from Packagist. The root project explicitly allows the
+Persistence RC while keeping Composer's default minimum stability.
 
 ```bash
 composer require maatify/php-eligibility:1.0.0-rc.3@RC maatify/php-persistence:1.0.0-rc.1@RC
@@ -263,7 +261,7 @@ installing or trying the package.
 | [Usage Guide](docs/guides/USAGE_GUIDE.md) | Consumer-facing API guide, capability decision map, input/output types, transaction notes, and links to runnable examples. |
 | [Runnable Examples](examples/) | Standalone public-API examples for evaluation, batch evaluation, management, replacement, PDO wiring, and typed exception handling. |
 | [Schema](schema/README.md) | Persistence contract, tables, bounds, applying/reapplying, and the local MySQL fixture. |
-| [CHANGELOG](CHANGELOG.md) | RC.3 target and release history. |
+| [CHANGELOG](CHANGELOG.md) | Published releases and compatibility changes. |
 | [Security Policy](SECURITY.md) | Support state, vulnerability reporting, and scope. |
 | [Contributing Guide](CONTRIBUTING.md) | Contribution expectations, local verification, and PR requirements. |
 | [Code of Conduct](CODE_OF_CONDUCT.md) | Community rules and reporting. |
