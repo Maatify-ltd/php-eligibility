@@ -1,20 +1,13 @@
 # Contributing Guide
 
-Thank you for contributing to `maatify/php-eligibility`. This repository
-currently targets the Pre-Stable `v1.0.0-rc.2` source/release line in the
-intended Stable `1.0` line. Its package identity is `maatify/php-eligibility`;
-Packagist is the intended distribution channel.
-
-Repository source alone does not establish Published state; exact external
-availability is determined by the exact `v1.0.0-rc.2` version tag through the
-approved Composer distribution source, not by this guide. No Published Stable
-release exists.
+The repository is preparing `1.0.0-rc.3` for Packagist. See the
+[README](README.md#status) for the release target and publication status.
 
 ## Package identity and boundaries
 
 - Package: `maatify/php-eligibility`, repository
-  `https://github.com/Maatify/php-eligibility`.
-- This is a standalone, framework-neutral eligibility library for PHP `^8.4`.
+  `https://github.com/Maatify-ltd/php-eligibility`.
+- This is a standalone, framework-neutral eligibility library for PHP `8.4.27+` on PHP 8.4 or `8.5.12+` on PHP 8.5.
   Runtime contracts are the canonical source of truth:
   [`ELIGIBILITY_PACKAGE_REFERENCE.md`](ELIGIBILITY_PACKAGE_REFERENCE.md).
 - The package owns `src/` (production API) and the schema asset in `schema/`.
@@ -29,13 +22,13 @@ release exists.
 - Code changes: open a pull request; see expectations below.
 - Documentation/presentation improvements: PRs are welcome, but they must not
   change runtime contracts and must stay accurate to the actual state
-  (including the current Pre-Stable `v1.0.0-rc.2` source/release-line state).
+  of the documented release target.
 - Vulnerability reports: use the private route documented in
   [SECURITY.md](SECURITY.md), never a public issue.
 
 ## Local verification commands
 
-Prerequisites: PHP `^8.4`, Composer, Docker for the real MySQL fixture.
+Prerequisites: PHP `8.4.27+` on PHP 8.4 or `8.5.12+` on PHP 8.5, Composer, Docker for the real MySQL fixture.
 
 The repository development and verification workflow requires Composer `2.10.x`.
 This is a development-tooling policy only; it is not a package runtime or
@@ -130,6 +123,13 @@ own disposable Compose state.
 ## Security reporting route
 
 Report suspected vulnerabilities privately via the
-[GitHub Security Advisories](https://github.com/Maatify/php-eligibility/security/advisories/new)
+[GitHub Security Advisories](https://github.com/Maatify-ltd/php-eligibility/security/advisories/new)
 channel described in [SECURITY.md](SECURITY.md). Do not file them as public
 issues.
+
+Run `tools/check-composer-php-boundaries.sh` to check the PHP constraint using Composer.
+Run `tools/check-release-archives.sh <commit>` from a Git checkout to inspect both
+release archives for that commit. With no argument, the command uses `HEAD`.
+For pre-publication RC.3 qualification, run
+`tools/check-release-archives.sh --qualify-rc3 <commit>` to verify the release
+presentation, including the undated CHANGELOG heading.

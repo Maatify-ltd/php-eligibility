@@ -1,17 +1,13 @@
 # Security Policy
 
-[![Maatify Eligibility](https://img.shields.io/badge/Maatify-Eligibility-blue?style=for-the-badge)](https://github.com/Maatify/php-eligibility)
-[![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-9C27B0?style=for-the-badge)](https://github.com/Maatify)
+[![Maatify Eligibility](https://img.shields.io/badge/Maatify-Eligibility-blue?style=for-the-badge)](https://github.com/Maatify-ltd/php-eligibility)
+[![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-9C27B0?style=for-the-badge)](https://github.com/Maatify-ltd)
 
 ## Supported Versions
 
-`maatify/php-eligibility` currently targets the Pre-Stable `v1.0.0-rc.2`
-source/release line, prepared for the Packagist distribution channel.
-
-Repository source alone does not establish Published state; exact external
-publication and installability are determined by the approved Composer
-distribution source. There is no Published Stable release, and pre-release/RC
-state creates no Stable SLA or support commitment.
+This artifact targets `v1.0.0-rc.3` (Release Candidate), unpublished at preparation.
+The latest published release at preparation was [`v1.0.0-rc.2`](https://packagist.org/packages/maatify/php-eligibility).
+It is a release candidate. There is no Stable release or Stable support commitment.
 
 ## Reporting a Vulnerability
 
@@ -19,7 +15,7 @@ Please report a suspected vulnerability privately instead of opening a public
 issue, so it can be assessed before it is disclosed.
 
 Use the repository's private security channel
-[GitHub Security Advisories](https://github.com/Maatify/php-eligibility/security/advisories/new)
+[GitHub Security Advisories](https://github.com/Maatify-ltd/php-eligibility/security/advisories/new)
 and include:
 
 - The affected package and the exact branch/commit you tested.

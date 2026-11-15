@@ -17,20 +17,20 @@ use Maatify\Eligibility\Management\Repository\RuleManagementQueryInterface;
 use Maatify\Eligibility\Repository\Pdo\PdoRuleHydrationTrait;
 use Maatify\Eligibility\ValueObject\Rule;
 use Maatify\Eligibility\ValueObject\RuleIdentity;
-use Maatify\Persistence\Pdo\Pagination\PageRequest;
-use Maatify\Persistence\Pdo\Pagination\PageResult;
-use Maatify\Persistence\Pdo\Pagination\PaginationConfig;
-use Maatify\Persistence\Pdo\Pagination\PdoPaginationQueryDescriptor;
-use Maatify\Persistence\Pdo\Pagination\PdoPaginator;
-use Maatify\Persistence\Pdo\Pagination\SortDirectionEnum;
-use Maatify\Persistence\Pdo\Pagination\SortWhitelist;
+use Maatify\PhpPersistence\Pagination\Criteria\PageRequest;
+use Maatify\PhpPersistence\Pagination\DTO\PageResultDTO;
+use Maatify\PhpPersistence\Pagination\Config\PaginationConfig;
+use Maatify\PhpPersistence\Pagination\Criteria\PdoPaginationQueryDescriptor;
+use Maatify\PhpPersistence\Pagination\Repository\PdoPaginator;
+use Maatify\PhpPersistence\Pagination\Enum\SortDirectionEnum;
+use Maatify\PhpPersistence\Pagination\ValueObject\SortWhitelist;
 use PDO;
 
 /**
  * Direct-PDO management query adapter.
  *
  * Identity reads include inactive Rules. Eligibility owns only its domain
- * filter/count SQL and row mapping; the shared `maatify/persistence`
+ * filter/count SQL and row mapping; the shared `maatify/php-persistence`
  * paginator owns page/per-page normalization, sort resolution, count
  * execution, and pagination metadata. Rule page ordering is the canonical
  * `dimension_key` ASC, `dimension_value` ASC fixed sort applied by the query
@@ -78,9 +78,9 @@ final class PdoRuleManagementQuery implements RuleManagementQueryInterface
      * Applies optional dimension/lifecycle/effect filters and returns one
      * canonically ordered page of the matching Rules for the Subject.
      *
-     * @return PageResult<Rule>
+     * @return PageResultDTO<Rule>
      */
-    public function findByCriteria(RuleCriteria $criteria, PageRequest $pageRequest): PageResult
+    public function findByCriteria(RuleCriteria $criteria, PageRequest $pageRequest): PageResultDTO
     {
         self::assertCanonicalRuleSort($pageRequest);
 
@@ -133,12 +133,12 @@ final class PdoRuleManagementQuery implements RuleManagementQueryInterface
      * Returns one canonically ordered page of distinct active dimension keys
      * for a Subject. Total and filtered are always equal for this query.
      *
-     * @return PageResult<ActiveDimensionKeyDTO>
+     * @return PageResultDTO<ActiveDimensionKeyDTO>
      */
     public function findActiveDimensionKeys(
         ActiveDimensionKeysCriteria $criteria,
         PageRequest $pageRequest,
-    ): PageResult {
+    ): PageResultDTO {
         self::assertCanonicalRuleSort($pageRequest);
 
         $params = [

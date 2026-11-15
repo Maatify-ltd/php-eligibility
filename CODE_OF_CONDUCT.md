@@ -1,7 +1,7 @@
 # Code of Conduct — maatify/php-eligibility
 
-[![Maatify Eligibility](https://img.shields.io/badge/Maatify-Eligibility-blue?style=for-the-badge)](https://github.com/Maatify/php-eligibility)
-[![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-9C27B0?style=for-the-badge)](https://github.com/Maatify)
+[![Maatify Eligibility](https://img.shields.io/badge/Maatify-Eligibility-blue?style=for-the-badge)](https://github.com/Maatify-ltd/php-eligibility)
+[![Maatify Ecosystem](https://img.shields.io/badge/Maatify-Ecosystem-9C27B0?style=for-the-badge)](https://github.com/Maatify-ltd)
 
 ## Our Pledge
 
@@ -45,7 +45,7 @@ officially representing the project or its community.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the maintainers through the repository's private security channel
-[GitHub Security Advisories](https://github.com/Maatify/php-eligibility/security/advisories/new).
+[GitHub Security Advisories](https://github.com/Maatify-ltd/php-eligibility/security/advisories/new).
 All reports will be reviewed promptly and handled confidentially.
 
 ## Enforcement

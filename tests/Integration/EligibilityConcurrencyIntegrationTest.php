@@ -25,8 +25,8 @@ use Maatify\Eligibility\ValueObject\Subject;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Maatify\Persistence\Pdo\Pagination\PageRequest;
-use Maatify\Persistence\Pdo\Transaction\PdoSavepointTransactionRunner;
+use Maatify\PhpPersistence\Pagination\Criteria\PageRequest;
+use Maatify\PhpPersistence\Transaction\Repository\PdoSavepointTransactionRunner;
 use PDO;
 
 final class EligibilityConcurrencyIntegrationTest extends TestCase

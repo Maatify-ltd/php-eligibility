@@ -1,11 +1,12 @@
 # Eligibility schema
 
-This directory contains the RC2 executable schema for package-owned Rule
-persistence and Subject-specific coordination metadata.
+This directory contains the executable schema for package-owned Rule
+persistence and Subject-specific coordination metadata. RC.3 retains the
+schema shipped with RC.2.
 
 ## Compatibility contract
 
-RC2 uses **MySQL-compatible database-server semantics through direct PDO**. The
+Eligibility uses **MySQL-compatible database-server semantics through direct PDO**. The
 database compatibility contract is capability-based, not product-version-based:
 no minimum MySQL version and no minimum MariaDB version is declared. A compatible
 database server must provide transactional InnoDB-style package-owned table
@@ -40,7 +41,7 @@ not a package minimum version.
   and is deleted by the management cleanup operation for that Subject.
 - When a Host transaction is already active, the management service uses the transactional
   `SAVEPOINT`, `ROLLBACK TO SAVEPOINT`, and `RELEASE SAVEPOINT` capabilities
-  through `maatify/persistence`'s `PdoSavepointTransactionRunner` to make each
+  through `maatify/php-persistence`'s `PdoSavepointTransactionRunner` to make each
   replacement/cleanup operation atomic without taking ownership of the Host
   transaction. The runner and Eligibility Rule adapters MUST use the same PDO
   connection. This is a capability requirement of the transactional

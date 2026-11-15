@@ -11,8 +11,8 @@ use Maatify\Eligibility\Management\DTO\ActiveDimensionKeyDTO;
 use Maatify\Eligibility\Management\DTO\RuleLifecycleSummaryDTO;
 use Maatify\Eligibility\ValueObject\Rule;
 use Maatify\Eligibility\ValueObject\RuleIdentity;
-use Maatify\Persistence\Pdo\Pagination\PageRequest;
-use Maatify\Persistence\Pdo\Pagination\PageResult;
+use Maatify\PhpPersistence\Pagination\Criteria\PageRequest;
+use Maatify\PhpPersistence\Pagination\DTO\PageResultDTO;
 
 /**
  * Management read boundary for identity, paginated criteria, active-dimension,
@@ -37,9 +37,9 @@ interface RuleManagementQueryInterface
      * `InvalidEligibilityInputException` rather than being normalized or
      * silently falling back.
      *
-     * @return PageResult<Rule>
+     * @return PageResultDTO<Rule>
      */
-    public function findByCriteria(RuleCriteria $criteria, PageRequest $pageRequest): PageResult;
+    public function findByCriteria(RuleCriteria $criteria, PageRequest $pageRequest): PageResultDTO;
 
     /**
      * Returns one page of distinct dimension keys with at least one active
@@ -52,12 +52,12 @@ interface RuleManagementQueryInterface
      * equivalent pair `dimension_key` + `ASC`; any other explicit sort
      * request throws `InvalidEligibilityInputException`.
      *
-     * @return PageResult<ActiveDimensionKeyDTO>
+     * @return PageResultDTO<ActiveDimensionKeyDTO>
      */
     public function findActiveDimensionKeys(
         ActiveDimensionKeysCriteria $criteria,
         PageRequest $pageRequest,
-    ): PageResult;
+    ): PageResultDTO;
 
     /**
      * Returns the Rule lifecycle count summary for the supplied criteria

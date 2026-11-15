@@ -4,13 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.0-rc.3]
+
+### Changed
+
+- Require PHP 8.4.27 or later in the 8.4 series, or PHP 8.5.12 or later in the 8.5 series. This narrows the published RC.2 PHP constraint for RC.3.
+
+- Migrate pagination and savepoint handling to `maatify/php-persistence 1.0.0-rc.1`. Advanced integrations using shared pagination or transaction types must update those imports.
+- Adopt the current engineering standards and refresh repository documentation.
+
 ## [1.0.0-rc.2] - 2026-09-28
 
-This entry describes the release payload prepared for `v1.0.0-rc.2`. This
-entry's heading, date, and release-tag link identify the intended release
-target; they are not publication evidence by themselves. Published state is
-established only when the exact version is externally resolvable and
-installable through the approved Composer distribution source.
+Published on [Packagist](https://packagist.org/packages/maatify/php-eligibility).
 
 ### Added
 
@@ -67,5 +72,6 @@ change the package's Eligibility business or evaluation semantics.
 
 - B1 structural and invariant failures now use a typed Eligibility exception backed by the shared Maatify validation hierarchy, `RuleReference` now exposes the canonical direct fields, and the runtime PCRE extension contract is declared.
 
-[1.0.0-rc.2]: https://github.com/Maatify/php-eligibility/releases/tag/v1.0.0-rc.2
-[1.0.0-rc.1]: https://github.com/Maatify/php-eligibility/releases/tag/v1.0.0-rc.1
+[Unreleased]: https://github.com/Maatify-ltd/php-eligibility/compare/v1.0.0-rc.2...HEAD
+[1.0.0-rc.2]: https://github.com/Maatify-ltd/php-eligibility/releases/tag/v1.0.0-rc.2
+[1.0.0-rc.1]: https://github.com/Maatify-ltd/php-eligibility/releases/tag/v1.0.0-rc.1

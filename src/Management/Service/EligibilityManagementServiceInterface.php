@@ -17,8 +17,8 @@ use Maatify\Eligibility\Management\DTO\ActiveDimensionKeyDTO;
 use Maatify\Eligibility\Management\DTO\RuleLifecycleSummaryDTO;
 use Maatify\Eligibility\ValueObject\Rule;
 use Maatify\Eligibility\ValueObject\RuleIdentity;
-use Maatify\Persistence\Pdo\Pagination\PageRequest;
-use Maatify\Persistence\Pdo\Pagination\PageResult;
+use Maatify\PhpPersistence\Pagination\Criteria\PageRequest;
+use Maatify\PhpPersistence\Pagination\DTO\PageResultDTO;
 
 /**
  * Public management boundary for Rule persistence, paginated inspection, and
@@ -50,10 +50,10 @@ interface EligibilityManagementServiceInterface
      * `null` direction, any `dimension_value` sort, or a `DESC` direction —
      * is rejected.
      *
-     * @return PageResult<Rule>
+     * @return PageResultDTO<Rule>
      * @throws \Maatify\Eligibility\Exception\InvalidEligibilityInputException if the sort request does not match one of those two shapes
      */
-    public function inspectRules(RuleCriteria $criteria, PageRequest $pageRequest): PageResult;
+    public function inspectRules(RuleCriteria $criteria, PageRequest $pageRequest): PageResultDTO;
 
     /**
      * Returns one canonically ordered page of active dimension keys for the
@@ -65,13 +65,13 @@ interface EligibilityManagementServiceInterface
      * shapes as {@see inspectRules()}: both `null`, or the explicit pair
      * `sortBy = 'dimension_key'` and `sortDirection = 'ASC'`.
      *
-     * @return PageResult<ActiveDimensionKeyDTO>
+     * @return PageResultDTO<ActiveDimensionKeyDTO>
      * @throws \Maatify\Eligibility\Exception\InvalidEligibilityInputException if the sort request does not match one of those two shapes
      */
     public function inspectActiveDimensionKeys(
         ActiveDimensionKeysCriteria $criteria,
         PageRequest $pageRequest,
-    ): PageResult;
+    ): PageResultDTO;
 
     /**
      * Returns the Rule lifecycle count summary for the supplied criteria
