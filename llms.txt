@@ -23,7 +23,10 @@ Supported Consumer Contract merely because they are visible here.
 
 ## Release and Security
 
-- [CHANGELOG.md](CHANGELOG.md) — RC.3 target and release history.
+- [Published RC.3](https://packagist.org/packages/maatify/php-eligibility#v1.0.0-rc.3) — exact Composer release.
+- [Published artifact verification](https://github.com/Maatify-ltd/php-eligibility/pull/42#issuecomment-6886363943) — verified dist installation and archive contents.
+
+- [CHANGELOG.md](CHANGELOG.md) — Published releases and compatibility changes.
 - [SECURITY.md](SECURITY.md) — pre-Stable security state, reporting route, and scope.
 
 ## Optional

@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [1.0.0-rc.3]
+## [1.0.0-rc.3] - 2026-11-15
+
+Published on [Packagist](https://packagist.org/packages/maatify/php-eligibility#v1.0.0-rc.3). [Published artifact verification](https://github.com/Maatify-ltd/php-eligibility/pull/42#issuecomment-6886363943).
 
 ### Changed
 
@@ -72,6 +74,7 @@ change the package's Eligibility business or evaluation semantics.
 
 - B1 structural and invariant failures now use a typed Eligibility exception backed by the shared Maatify validation hierarchy, `RuleReference` now exposes the canonical direct fields, and the runtime PCRE extension contract is declared.
 
-[Unreleased]: https://github.com/Maatify-ltd/php-eligibility/compare/v1.0.0-rc.2...HEAD
+[Unreleased]: https://github.com/Maatify-ltd/php-eligibility/compare/v1.0.0-rc.3...HEAD
+[1.0.0-rc.3]: https://github.com/Maatify-ltd/php-eligibility/releases/tag/v1.0.0-rc.3
 [1.0.0-rc.2]: https://github.com/Maatify-ltd/php-eligibility/releases/tag/v1.0.0-rc.2
 [1.0.0-rc.1]: https://github.com/Maatify-ltd/php-eligibility/releases/tag/v1.0.0-rc.1

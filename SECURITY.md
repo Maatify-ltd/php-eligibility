@@ -5,8 +5,8 @@
 
 ## Supported Versions
 
-This artifact targets `v1.0.0-rc.3` (Release Candidate), unpublished at preparation.
-The latest published release at preparation was [`v1.0.0-rc.2`](https://packagist.org/packages/maatify/php-eligibility).
+The latest published release is [`v1.0.0-rc.3`](https://packagist.org/packages/maatify/php-eligibility#v1.0.0-rc.3).
+See the [published artifact verification](https://github.com/Maatify-ltd/php-eligibility/pull/42#issuecomment-6886363943).
 It is a release candidate. There is no Stable release or Stable support commitment.
 
 ## Reporting a Vulnerability
